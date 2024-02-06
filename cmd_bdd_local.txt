@@ -1,0 +1,22 @@
+# Voici les commandes que j'ai pu réaliser sur mon APIrest local
+
+# Création d'un docker local
+docker run -d -it -e POSTGRES_PASSWORD=toto -p 8765:5432 --name pg postgres
+psql -h 127.0.0.1 -p 8765 -U postgres
+psql -h 127.0.0.1 -p 8765 -U postgres < ./shema.sql
+app.run()
+#Lorsque app.run() est lancé il est possible de tester :
+
+# Test en local de la méthode PUT, voir voiture.py
+curl -X PUT -H "Content-type: application/json" -d '{"name": "Yaris2", "price":2500, "quantity":0}' http://localhost:5000/voiture/101
+
+# Test en local de la méthode DELETE, voir voiture.py
+curl -X DELETE http://localhost:5000/voiture/1
+
+# Ajouter une voiture via la méthode POST
+curl -X POST -H "Content-type: application/json" -d '{"name": "Yaris4", "price":6500, "quantity":1}' "http://localhost:5000/voiture"
+
+# Ouvrir le web serveur en local
+xdg-open 'ajouter_voiture.html'
+
+

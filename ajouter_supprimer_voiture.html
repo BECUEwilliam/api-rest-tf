@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier/Supprimer une voiture</title>
+</head>
+<body>
+
+<h1>Modifier/Supprimer une voiture</h1>
+
+<form id="modifyDeleteCarForm">
+    <label for="carId">ID de la voiture:</label>
+    <input type="number" id="carId" name="carId" required><br>
+
+    <label for="carName">Nouveau nom de la voiture:</label>
+    <input type="text" id="carName" name="carName"><br>
+
+    <label for="carPrice">Nouveau prix de la voiture:</label>
+    <input type="number" id="carPrice" name="carPrice"><br>
+
+    <label for="carQuantity">Nouvelle quantité de la voiture:</label>
+    <input type="number" id="carQuantity" name="carQuantity"><br>
+
+    <button type="button" onclick="modifyCar()">Modifier la voiture</button>
+    <button type="button" onclick="deleteCar()">Supprimer la voiture</button>
+</form>
+
+<script>
+    function modifyCar() {
+        var carId = document.getElementById("carId").value;
+        var carName = document.getElementById("carName").value;
+        var carPrice = document.getElementById("carPrice").value;
+        var carQuantity = document.getElementById("carQuantity").value;
+        var carData = {
+	    "name": carName,
+	    "price": carPrice,
+	    "quantity": carQuantity
+	};
+
+	fetch(`/voiture/${carId}`, {
+	    method: 'PUT',
+	    headers: {
+	        'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify(carData)
+	 })
+	 .then(response => response.json())
+	 .then(data => {
+	      console.log(data);
+	      alert(`Voiture avec ID ${carId} modifiée avec succès!`);
+	 })
+	 .catch(error => {
+	     console.error('Erreur lors de la modification de la voiture:', error);
+	     alert("Une erreur s'est produite lors de la modification de la voiture. Veuillez vérifier la console pour plus de détails.");
+	 });
+    }
+    function deleteCar() {
+        var carId = document.getElementById("carId").value;
+
+        fetch(`/voiture/${carId}`, {
+												                method: 'DELETE'
+												            })
+							            .then(response => response.json())
+							            .then(data => {
+												                console.log(data);
+												                alert(`Voiture avec ID ${carId} supprimée avec succès!`);
+												            })
+							            .catch(error => {
+												                console.error('Erreur lors de la suppression de la voiture:', error);
+												                alert("Une erreur s'est produite lors de la suppression de la voiture. Veuillez vérifier la console pour plus de détails.");
+												            });
+							        }
+		</script>
+
+	</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		    <meta charset="UTF-8">
+		        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			    <title>Modifier/Supprimer une voiture</title>
+	</head>
+	<body>
+
+		<h1>Modifier/Supprimer une voiture</h1>
+
+		<form id="modifyDeleteCarForm">
+			    <label for="carId">ID de la voiture:</label>
+			        <input type="number" id="carId" name="carId" required><br>
+
+				    <label for="carName">Nouveau nom de la voiture:</label>
+				        <input type="text" id="carName" name="carName"><br>
+
+					    <label for="carPrice">Nouveau prix de la voiture:</label>
+					        <input type="number" id="carPrice" name="carPrice"><br>
+
+						    <label for="carQuantity">Nouvelle quantité de la voiture:</label>
+						        <input type="number" id="carQuantity" name="carQuantity"><br>
+
+							    <button type="button" onclick="modifyCar()">Modifier la voiture</button>
+							        <button type="button" onclick="deleteCar()">Supprimer la voiture</button>
+		</form>
+
+		<script>
+			    function modifyCar() {
+							            var carId = document.getElementById("carId").value;
+							            var carName = document.getElementById("carName").value;
+							            var carPrice = document.getElementById("carPrice").value;
+							            var carQuantity = document.getElementById("carQuantity").value;
+
+							            var carData = {
+												                "name": carName,
+												                "price": carPrice,
+												                "quantity": carQuantity
+												            };
+
+							            fetch(`/voiture/${carId}`, {
+												                method: 'PUT',
+												                headers: {
+																		                'Content-Type': 'application/json'
+																		            },
+												                body: JSON.stringify(carData)
+												            })
+							            .then(response => response.json())
+							            .then(data => {
+												                console.log(data);
+												                alert(`Voiture avec ID ${carId} modifiée avec succès!`);
+												            })
+							            .catch(error => {
+												                console.error('Erreur lors de la modification de la voiture:', error);
+												                alert("Une erreur s'est produite lors de la modification de la voiture. Veuillez vérifier la console pour plus de détails.");
+												            });
+							        }
+
+			    function deleteCar() {
+							            var carId = document.getElementById("carId").value;
+
+							            fetch(`/voiture/${carId}`, {
+												                method: 'DELETE'
+												            })
+							            .then(response => response.json())
+							            .then(data => {
+												                console.log(data);
+												                alert(`Voiture avec ID ${carId} supprimée avec succès!`);
+												            })
+							            .catch(error => {
+												                console.error('Erreur lors de la suppression de la voiture:', error);
+												                alert("Une erreur s'est produite lors de la suppression de la voiture. Veuillez vérifier la console pour plus de détails.");
+												            });
+							        }
+		</script>
+
+	</body>
+</html>
+
+
