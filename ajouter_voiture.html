@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une voiture</title>
+</head>
+<body>
+
+<h1>Ajouter une voiture</h1>
+
+<form id="addCarForm">
+    <label for="carName">Nom de la voiture:</label>
+    <input type="text" id="carName" name="carName" required><br>
+
+    <label for="carPrice">Prix de la voiture:</label>
+    <input type="number" id="carPrice" name="carPrice" required><br>
+
+    <label for="carQuantity">Quantité de la voiture:</label>
+    <input type="number" id="carQuantity" name="carQuantity" required><br>
+
+    <button type="button" onclick="addCar()">Ajouter la voiture</button>
+</form>
+
+<script>
+    function addCar() {
+	
+        // Récupérer les valeurs du formulaire
+        var carName = document.getElementById("carName").value;
+	var carPrice = document.getElementById("carPrice").value;
+	var carQuantity = document.getElementById("carQuantity").value;
+
+	// Créer un objet JSON avec les données du formulaire
+	var carData = {
+	    "name": carName,
+	    "price": carPrice,
+	    "quantity": carQuantity
+						            };
+
+	// Effectuer une requête POST vers votre endpoint Flask
+	fetch('/voiture', {
+	    method: 'POST',
+	    headers: {
+	        'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify(carData)
+	})
+	.then(response => response.json())
+	.then(data => {
+	    // Gérer la réponse du serveur (peut être afficher un message de succès, etc.)
+	    console.log(data);
+	    alert("Voiture ajoutée avec succès! ID de la nouvelle voiture : " + data.id);
+	})
+	.catch(error => {
+	    console.error('Erreur lors de l\'ajout de la voiture:', error);
+	    alert("Une erreur s'est produite lors de l'ajout de la voiture. Veuillez vérifier la console pour plus de détails.");
+	});
+     }
+</script>
+
+</body>
+</html>
+
